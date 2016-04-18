@@ -21,30 +21,28 @@
       template: _.template($("#input-template").html()),
       events: {
         "click .destroy": "clear",
-        "blur [placeholder='index']": "updateIndex",
-        "blur [placeholder='key']": "updateKey",
-        "blur [placeholder='value']": "updateValue"
+        "blur [placeholder='index']": "updateOnBlur",
+        "blur [placeholder='key']": "updateOnBlur",
+        "blur [placeholder='value']": "updateOnBlur"
       },
       initialize: function () {
         this.listenTo(this.model, "change", this.render);
         this.listenTo(this.model, "destroy", this.remove);
       },
-      render: function () {
+      render: function () {//model的值改变后调用
         this.$el.html(this.template(this.model.toJSON()));
         return this;
       },
       clear: function () {
         this.model.destroy();
       },
-      updateIndex: function () {
-        this.model.attributes.index = this.$("[placeholder='index']").val();
-      },
-      updateKey: function () {
-        this.model.attributes.key = this.$("[placeholder='key']").val();
-      },
-      updateValue: function () {
-        this.model.attributes.value = this.$("[placeholder='value']").val();
-      },
+      updateOnBlur: function () {//监听blur事件,改变model的值
+        this.model.set({
+          index: this.$("[placeholder='index']").val(),
+          key: this.$("[placeholder='key']").val(),
+          value: this.$("[placeholder='value']").val()
+        })
+      }
     });
     var AppView = Backbone.View.extend({
       el: $("body"),
@@ -69,6 +67,7 @@
         $.each(Ml.models, function (index, value) {
           arr.push(value.attributes);
         });
+        console.log(arr);
         arr.sort(function (a, b) {
           return a.index - b.index;
         });
