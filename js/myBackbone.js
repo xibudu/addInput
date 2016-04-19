@@ -63,14 +63,14 @@
       },
       submit: function () {
         var arr = [];
-        Ml.each(function (ml) {
+        Ml.each(function (ml) {//遍历Ml集合,把每个集合中的对象push进arr数组
           arr.push(ml);
         });
-         arr.sort(function (a, b) {
+         arr.sort(function (a, b) {//依据数组中每个对象的index属性排序
          return a.get("index") - b.get("index");
          });
         var json={};
-        $.each(arr,function(i,v){
+        $.each(arr,function(i,v){//把arr的数组中变成json格式
           json[v.get("key")]= v.get("value");
         });
         console.log(json);
