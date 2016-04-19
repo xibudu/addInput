@@ -5,8 +5,8 @@
       defaults: function () {
         return {
           index: i++,
-          key: "key",
-          value: "value"
+          key: "",
+          value: ""
         }
 
       }
@@ -63,16 +63,15 @@
       },
       submit: function () {
         var arr = [];
-        var json = {};
-        $.each(Ml.models, function (index, value) {
-          arr.push(value.attributes);
+        Ml.each(function (ml) {
+          arr.push(ml);
         });
-        console.log(arr);
-        arr.sort(function (a, b) {
-          return a.index - b.index;
-        });
-        $.each(arr, function (index, value) {
-          json[value.key] = value.value;
+         arr.sort(function (a, b) {
+         return a.get("index") - b.get("index");
+         });
+        var json={};
+        $.each(arr,function(i,v){
+          json[v.get("key")]= v.get("value");
         });
         console.log(json);
       }
