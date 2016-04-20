@@ -1,6 +1,22 @@
-(function ($) {
-  $(function () {
-    var i = 1;
+require.config({
+  paths:{
+    "jquery":"jquery-1.11.3",
+    "underscore":"underscore-min",
+    "backbone":"backbone-min",
+    "localStorage":"backbone.localStorage"
+  },
+  shim:{
+    "underscore":{
+      exports:"_"
+    },
+    "Backbone":{
+      deps:["jquery","underscore"],
+      exports:"Backbone"
+    },
+    ""
+  }
+})
+ var i = 1;
     var MSingel = Backbone.Model.extend({
       defaults: function () {
         return {
@@ -77,5 +93,3 @@
       }
     });
     var appView = new AppView;
-  })
-}(jQuery));
