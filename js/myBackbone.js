@@ -1,22 +1,23 @@
 require.config({
-  paths:{
-    "jquery":"jquery-1.11.3",
-    "underscore":"underscore-min",
-    "backbone":"backbone-min",
-    "localStorage":"backbone.localStorage"
+  paths: {
+    "jquery": "jquery-1.11.3",
+    "underscore": "underscore-min",
+    "Backbone": "backbone-min",
+    "localStorage": "backbone.localStorage"
   },
-  shim:{
-    "underscore":{
-      exports:"_"
+  shim: {
+    "underscore": {
+      exports: "_"
     },
-    "Backbone":{
-      deps:["jquery","underscore"],
-      exports:"Backbone"
-    },
-    ""
+    "Backbone": {
+      deps: ["jquery", "underscore"],
+      exports: "Backbone"
+    }
   }
-})
- var i = 1;
+});
+require(["jquery", "underscore", "Backbone"], function ($, _, Backbone) {
+  $(function () {
+    var i = 1;
     var MSingel = Backbone.Model.extend({
       defaults: function () {
         return {
@@ -24,7 +25,6 @@ require.config({
           key: "",
           value: ""
         }
-
       }
     });
     var MList = Backbone.Collection.extend({
@@ -82,14 +82,16 @@ require.config({
         Ml.each(function (ml) {//遍历Ml集合,把每个集合中的对象push进arr数组
           arr.push(ml);
         });
-         arr.sort(function (a, b) {//依据数组中每个对象的index属性排序
-         return a.get("index") - b.get("index");
-         });
-        var json={};
-        $.each(arr,function(i,v){//把arr的数组中变成json格式
-          json[v.get("key")]= v.get("value");
+        arr.sort(function (a, b) {//依据数组中每个对象的index属性排序
+          return a.get("index") - b.get("index");
+        });
+        var json = {};
+        $.each(arr, function (i, v) {//把arr的数组中变成json格式
+          json[v.get("key")] = v.get("value");
         });
         console.log(json);
       }
     });
     var appView = new AppView;
+  })
+});

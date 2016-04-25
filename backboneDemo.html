@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/index.css">
-  <script src="js/require.js" defer async="true" data-main="js/myBackbone"></script>
+  <script src="js/require.js" defer async="true" data-main="js/myBackbone.js"></script>
   <title>Backbone实现</title>
 </head>
 <body>
 <div class="container"></div>
+<button class="btn-success btn" id="addInput">添加输入框</button>
+<button class="btn-danger btn" id="submit">提交</button>
 <script type="text/template" id="input-template">
   <input type="number" placeholder="index" value="<%= index %>"/>
   <input type="text" placeholder="key" value="<%= key %>">
