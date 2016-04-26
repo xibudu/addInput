@@ -5,7 +5,6 @@ angular.module('myApp', ['ng'])
     $scope.add=function(){
       var obj={index:i++};
       $scope.lists.push(obj);
-      _hmt.push(['_trackEvent', "angularJS", "add", "item"]);
     };
 
     $scope.del=function(idx){
@@ -20,6 +19,5 @@ angular.module('myApp', ['ng'])
         json[v.key]= v.value;
       });
       console.log(json);
-      _hmt.push(['_trackEvent', "angularJS", "submit", "server"]);
     }
   });
